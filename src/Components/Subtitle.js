@@ -1,4 +1,5 @@
 import React from   'react'
+import AddButton from './AddButton'
 
 class Subtitle extends React.Component{
     render(){

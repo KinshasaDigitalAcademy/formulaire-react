@@ -25,37 +25,47 @@ class Formulaire extends React.Component{
     render(){
         console.log(this.props.contactToEdit.nom);
         return(
-            <div>
-              
-            <Subtitle content="Formulaire"/>  
-            <form onSubmit={this.click.bind(this)}>
-                  <Input placeholder="Nom" name="nom"  value={this.props.contactToEdit.nom} handleChange={this.handleChange} />
-                  <Input placeholder="Prénom" name="prenom" value={this.props.contactToEdit.prenom} handleChange={this.handleChange} />
-
+            <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-notification-enter" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <Subtitle content="Formulaire"/> 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form onSubmit={this.click.bind(this)}>
+                                <Input placeholder="Nom" name="nom"  value={this.props.contactToEdit.nom} handleChange={this.handleChange} />
+                                <Input placeholder="Prénom" name="prenom" value={this.props.contactToEdit.prenom} handleChange={this.handleChange} />
+                                        
+                                <div className = 'form-group'>
+                                        <select name="groupe" placeholder="Groupe" className = 'form-control'
+                                        defaultValue={this.props.contactToEdit.groupe}>
+                                            <option>Ami</option>
+                                            <option>Famille</option>
+                                            <option>Pro</option>
+                                        </select>
+                                </div> 
+                                <div className = 'form-group'> 
+                                    <textarea name="bio" placeholder="Bio" className = 'form-control'
+                                    defaultValue={this.props.contactToEdit.bio}></textarea>
+                                </div> 
+                                
+                                <div className = 'form-group'>
+                                    <input name="file" type="file" className = 'form-control'></input>
+                                    <div className="photo"></div>
+                                </div>
+                                <Button type="submit" content="Créer" className = 'btn btn-primary mr-2'/>
+                                <Button type="reset" content="Initialiser" className = 'btn btn-danger'/>
+                                
+                            </form>
                         
-                <div className = 'form-group'>
-                        <select name="groupe" placeholder="Groupe" className = 'form-control'
-                        defaultValue={this.props.contactToEdit.groupe}>
-                            <option>Ami</option>
-                            <option>Famille</option>
-                            <option>Pro</option>
-                        </select>
-                </div> 
-                <div className = 'form-group'> 
-                    <textarea name="bio" placeholder="Bio" className = 'form-control'
-                    defaultValue={this.props.contactToEdit.bio}></textarea>
-                </div> 
-                   
-                    <div className = 'form-group'>
-                        <input name="file" type="file" className = 'form-control'></input>
-                        <div className="photo"></div>
+                        </div>
                     </div>
-                    <Button type="submit" content="Créer" className = 'btn btn-primary mr-2'/>
-                    <Button type="reset" content="Initialiser" className = 'btn btn-danger'/>
-                    
-              </form>
-                
+                </div>
             </div>
+                
         )
     }
 }

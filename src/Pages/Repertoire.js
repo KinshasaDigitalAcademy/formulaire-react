@@ -2,13 +2,18 @@ import React from 'react'
 import Subtitle from '../Components/Subtitle'
 import Card from '../Components/Card'
 import logo from '../logo.svg'
+import AddButton from '../Components/AddButton';
 class Repertoire extends React.Component{
 
     render(){
        let tableauContacts=this.props.contacts;
         return(
             <div>
-                <Subtitle content= 'Liste de contact'/>
+                <div className="d-flex">
+                    {/* <Subtitle content= 'Liste de contact'/>  */}
+                    
+                </div>
+                
                 <div>
                     {
                     tableauContacts.map((contact,index)=>{
