@@ -8,10 +8,12 @@ class Input extends React.Component{
     }
 
     render(){
+        
         return(
+
             <div className = 'form-group'>
                 <input type="text" placeholder={this.props.placeholder} className = 'form-control'
-                name={this.props.name} defaultValue={this.props.value} onChange={this.handleChange}></input>
+                name={this.props.name} value={this.props.value || ''} onChange={this.handleChange}></input>
             </div>
         )
     }

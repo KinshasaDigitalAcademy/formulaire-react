@@ -4,57 +4,89 @@ import Input from '../Components/Input'
 import Button from '../Components/Button'
 import Subtitle from '../Components/Subtitle'
 
-class Formulaire extends React.Component{
-    constructor(props){
+class Formulaire extends React.Component {
+    constructor(props) {
         super(props);
+        this.state = {
+            form: {
+                
+            },
+            isEditing : false
+        }
     }
-    click(event){
-        event.preventDefault();
-        let Tableau=event.target.elements;
-        let data={};
-        Tableau = Array.from(Tableau).map(element=>{
-            data[element.name]=element.value;
+    handleChange = (inputValue) => {
+        const key = Object.keys(inputValue)[0];
+        const form = {...this.state.form};
+        form[key] = inputValue[key];
+        this.setState({ form });
+        console.log(this.state.form);
+    }
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.contactToEdit !== this.props.contactToEdit){
+            console.log(prevProps.contactToEdit);
+            console.log(this.props.contactToEdit)
+            this.setState({
+                form : this.props.contactToEdit,
+                isEditing : true
+            })
+        }
+    }
+    resetForm = () => {
+        this.setState({
+            form : {},
+            isEditing : false
         })
-        this.props.submit(data);
     }
-
-    handleChange = (e) =>{
-        console.log(e);
+    onSubmit = (event) => {
+        event.preventDefault();
+      if(this.state.isEditing) {
+          this.props.onUpdate(this.state.form);
+          
+      } else {
+          this.props.onCreate(this.state.form);
+      }
+      this.resetForm();
     }
-
-    render(){
-        console.log(this.props.contactToEdit.nom);
-        return(
+    handleField = (e) => {
+        let value = e.target.value;
+        let key = e.target.name;
+        this.handleChange({[key] : value});
+        console.log(this.state.form);
+    }
+    render() {
+       return (
             <div>
-              
-            <Subtitle content="Formulaire"/>  
-            <form onSubmit={this.click.bind(this)}>
-                  <Input placeholder="Nom" name="nom"  value={this.props.contactToEdit.nom} handleChange={this.handleChange} />
-                  <Input placeholder="Prénom" name="prenom" value={this.props.contactToEdit.prenom} handleChange={this.handleChange} />
+                <Subtitle content="Formulaire" />
+                <form onSubmit={this.onSubmit}>
+                    <Input placeholder="Nom" name="nom" value={this.state.form.nom}
+                        handleChange={this.handleChange} />
 
-                        
-                <div className = 'form-group'>
-                        <select name="groupe" placeholder="Groupe" className = 'form-control'
-                        defaultValue={this.props.contactToEdit.groupe}>
+                    <Input placeholder="Prénom" name="prenom" value={this.state.form.prenom} handleChange={this.handleChange} />
+
+                    <div className='form-group'>
+                        <select name="groupe" placeholder="Groupe" className='form-control'
+                            value={this.state.form.groupe || ''} onChange = {this.handleField}>
+                            <option></option>
                             <option>Ami</option>
                             <option>Famille</option>
                             <option>Pro</option>
                         </select>
-                </div> 
-                <div className = 'form-group'> 
-                    <textarea name="bio" placeholder="Bio" className = 'form-control'
-                    defaultValue={this.props.contactToEdit.bio}></textarea>
-                </div> 
-                   
-                    <div className = 'form-group'>
-                        <input name="file" type="file" className = 'form-control'></input>
+                    </div>
+                    <div className='form-group'>
+                        <textarea name="bio" placeholder="Bio" className='form-control'
+                             onChange = {this.handleField}>{this.state.form.bio}</textarea>
+                    </div>
+
+                    <div className='form-group'>
+                        <input name="file" type="file" className='form-control'></input>
                         <div className="photo"></div>
                     </div>
-                    <Button type="submit" content="Créer" className = 'btn btn-primary mr-2'/>
-                    <Button type="reset" content="Initialiser" className = 'btn btn-danger'/>
-                    
-              </form>
-                
+                    <Button type="submit" content={this.state.isEditing ? 'Modifier' : 'Créer'} className='btn btn-primary mr-2' />
+                    <Button type="reset" content="Initialiser" handleClick = {this.resetForm}
+                     className='btn btn-danger' />
+
+                </form>
+
             </div>
         )
     }

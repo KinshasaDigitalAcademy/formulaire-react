@@ -13,7 +13,9 @@ class Repertoire extends React.Component{
                     {
                     tableauContacts.map((contact,index)=>{
                         let {nom ,prenom,bio,groupe}=contact;
-                        return  <Card id={index}  key={index} image={logo} nom={nom} prenom={prenom} bio={bio} groupe={groupe} clickEdit={this.props.clickEdit} clickDelete={this.props.clickDelete}/>
+                        return  <Card id={index}  key={index} image={logo} nom={nom} prenom={prenom} bio={bio} groupe={groupe} 
+                        clickEdit={this.props.clickEdit} 
+                        clickDelete={this.props.clickDelete}/>
                     })
                     }      
                 </div>

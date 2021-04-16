@@ -19,21 +19,23 @@ class Home extends React.Component{
             }
         }
     }
-    onSubmit(formData){
-        console.log(formData)
+    onContactCreate = (formData)=>{
         this.setState({contacts:[...this.state.contacts,formData]})
+    }
+    onContactUpdate = (formData) => {
+        let newContacts = [...this.state.contacts];
+        newContacts[formData.key] = formData;
+        this.setState({contacts : newContacts});
     }
 
     editContact = (index)=>{
-       let contactToEdit = this.state.contacts[index];
-        this.setState({contactToEdit})
+        let contactToEdit = this.state.contacts[index];
+        contactToEdit.key = index;
+        this.setState({contactToEdit});
         
     }
-
-
     deleteContact = (index)=>{
-        let newContacts = [...this.state.contacts]
-
+        let newContacts = [...this.state.contacts];
         newContacts.splice(index,1)
         this.setState({contacts : newContacts})
     }
@@ -47,7 +49,7 @@ class Home extends React.Component{
                 </div>
                 <div className = 'row'>
                     <div className = 'col-md-6 col-12'>
-                        <Formulaire submit={this.onSubmit.bind(this)} 
+                        <Formulaire onCreate={this.onContactCreate} onUpdate = {this.onContactUpdate}
                         contactToEdit = {this.state.contactToEdit}/>
                     </div>
                     <div className = 'col-md-6 col-12'>
