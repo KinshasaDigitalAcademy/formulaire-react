@@ -2,7 +2,8 @@ import React from 'react';
 import Formulaire from './Formulaire';
 import Header from './Header';
 import Repertoire from './Repertoire';
-
+import 'bootstrap/dist/css/bootstrap.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 class Home extends React.Component{
     constructor(props){
@@ -38,12 +39,25 @@ class Home extends React.Component{
     }
     render(){
         return(
-            <div>
-                <Header></Header>
-                <div className="mainFormulaire">
-                    <Formulaire submit={this.onSubmit.bind(this)} contactToEdit = {this.state.contactToEdit}/>
-                    <Repertoire  contacts={this.state.contacts} clickEdit={this.editContact} clickDelete={this.deleteContact}/>
+            <div className = 'container'>              
+                <div className = 'row my-3'>
+                    <div className = 'col-12'>
+                        <Header></Header>
+                    </div>                  
                 </div>
+                <div className = 'row'>
+                    <div className = 'col-md-6 col-12'>
+                        <Formulaire submit={this.onSubmit.bind(this)} 
+                        contactToEdit = {this.state.contactToEdit}/>
+                    </div>
+                    <div className = 'col-md-6 col-12'>
+                        <Repertoire  contacts={this.state.contacts} clickEdit={this.editContact} 
+                        clickDelete={this.deleteContact}/> 
+                    </div>
+                    
+                    
+                </div>
+   
             </div>
         )
     }

@@ -4,7 +4,7 @@ class Header extends React.Component{
     render(){
         return(
             <div>
-                <h1>REPERTOIRE DE CONTACTS</h1>
+                <h1 className = 'text-center title--style'>REPERTOIRE DE CONTACTS</h1>
             </div>
             
         )

@@ -1,27 +1,26 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Button from './Button'
 
 
-class Card extends Component{
-    render(){
-        const {image, nom, prenom, groupe, bio}= this.props
+class Card extends Component {
+    render() {
+        const { image, nom, prenom, groupe, bio } = this.props
         return (
-            <div className="card">
-                
-                <div className="card--image">
-                    <img src={image}/>
-                </div>
-                <div className="card--content">
-                    <p><span>{nom} </span><span>{prenom}</span></p>
-                    <p>{groupe}</p>
-                    <p>{bio}</p>
-                    
-                   
-                </div>
-                <div className="icons">
-                    <i onClick={()=>{this.props.clickEdit(this.props.id)}}>edit</i>
-                    <br/>
-                    <i onClick={()=>{this.props.clickDelete(this.props.id)}}>delete</i>
+            <div className='card'>
+                <div className="row">
+                    <div className="col-3">
+                        <img src={image} className='img-fluid rounded-circle'/>
+                    </div>
+                    <div className="col-9">
+                        <p><span>{nom} </span><span>{prenom}</span></p>
+                        <p>{groupe}</p>
+                        <p>{bio}</p>
+
+                    </div>
+                    <div className="position-absolute r-0 px-3" >
+                        <i onClick={() => { this.props.clickEdit(this.props.id) } } className = 'mr-3 fas fa-edit text-primary cursor-pointer'></i>
+                        <i onClick={() => { this.props.clickDelete(this.props.id) }} className = 'fas fa-trash-alt text-danger cursor-pointer'></i>
+                    </div>
                 </div>
             </div>
         )

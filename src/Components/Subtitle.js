@@ -4,7 +4,7 @@ class Subtitle extends React.Component{
     render(){
         return(
            <div>
-                <h2 >{this.props.content}</h2>
+                <h2 className = 'text-center'>{this.props.content}</h2>
             </div>
         )
     }
