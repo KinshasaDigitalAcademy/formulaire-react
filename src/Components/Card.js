@@ -6,14 +6,14 @@ class Card extends Component {
     render() {
         const { image, nom, prenom, groupe, bio } = this.props
         return (
-            <div className='card'>
+            <div className='card shadow shadow-md border-0 mb-3 pt-4'>
                 <div className="row">
-                    <div className="col-3">
+                    <div className="col-3 d-flex align-items-center">
                         <img src={image} className='img-fluid rounded-circle'/>
                     </div>
-                    <div className="col-9">
-                        <p><span>{nom} </span><span>{prenom}</span></p>
-                        <p>{groupe}</p>
+                    <div className="col-9 d-flex flex-column">
+                        <span className="font-weight-bold">{nom} {prenom}</span>
+                        <span className="text-info">{groupe}</span>
                         <p>{bio}</p>
 
                     </div>
